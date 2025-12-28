@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,14 +6,14 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 240 10% 10%;
+    --background: 220 25% 98%;
+    --foreground: 240 15% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
+    --card-foreground: 240 15% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
+    --popover-foreground: 240 15% 8%;
 
     --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
@@ -21,20 +21,20 @@
     --secondary: 199 89% 48%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 220 18% 95%;
+    --muted-foreground: 220 10% 40%;
 
-    --accent: 328 86% 70%;
+    --accent: 328 86% 65%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 220 15% 88%;
+    --input: 220 15% 92%;
     --ring: 262 83% 58%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
@@ -44,7 +44,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-['Inter'];
+    @apply bg-background text-foreground font-['Inter'] antialiased;
   }
 
   h1,
@@ -53,20 +53,65 @@
   h4,
   h5,
   h6 {
-    @apply font-['Montserrat'] font-bold;
+    @apply font-['Montserrat'] font-bold tracking-tight;
   }
 }
 
 @layer utilities {
   .gradient-text {
     @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+    animation: gradient-shift 8s ease infinite;
+    background-size: 200% auto;
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   .gradient-bg {
     @apply bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10;
   }
 
+  .gradient-border {
+    position: relative;
+    background: white;
+    border-radius: 1rem;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    padding: 2px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent)),
+      hsl(var(--secondary))
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+  }
+
+  .glass {
+    @apply backdrop-blur-xl bg-white/70 border border-white/20 shadow-lg;
+  }
+
+  .glow {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
   }
 }

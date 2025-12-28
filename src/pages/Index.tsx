@@ -78,14 +78,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-50 backdrop-blur-lg bg-background/80 border-b">
-        <div className="container mx-auto px-4 py-4">
+      <header className="sticky top-0 z-50 glass border-b">
+        <div className="container mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold gradient-text">merkurev.space</h1>
-            <nav className="hidden md:flex gap-6">
-              <a href="#articles" className="hover:text-primary transition-colors">Статьи</a>
-              <a href="#about" className="hover:text-primary transition-colors">Об авторе</a>
-              <a href="#contact" className="hover:text-primary transition-colors">Контакты</a>
+            <h1 className="text-2xl font-extrabold gradient-text">merkurev.space</h1>
+            <nav className="hidden md:flex gap-8">
+              <a href="#articles" className="font-medium hover:text-primary transition-all hover:scale-105">Статьи</a>
+              <a href="#about" className="font-medium hover:text-primary transition-all hover:scale-105">Об авторе</a>
+              <a href="#contact" className="font-medium hover:text-primary transition-all hover:scale-105">Контакты</a>
             </nav>
             <Button className="md:hidden" variant="ghost" size="icon">
               <Icon name="Menu" size={24} />
@@ -94,23 +94,27 @@ const Index = () => {
         </div>
       </header>
 
-      <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 gradient-bg opacity-50"></div>
+      <section className="relative overflow-hidden py-24 md:py-40">
+        <div className="absolute inset-0 gradient-bg opacity-60"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-7xl font-extrabold mb-6 gradient-text animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-block mb-6 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 animate-in fade-in duration-700">
+              <span className="text-sm font-semibold text-primary">✨ Добро пожаловать</span>
+            </div>
+            <h2 className="text-6xl md:text-8xl font-black mb-8 gradient-text animate-in fade-in slide-in-from-bottom-4 duration-700 leading-tight">
               Блог о технологиях, дизайне и жизни
             </h2>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+            <p className="text-xl md:text-3xl text-muted-foreground/90 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 font-medium max-w-3xl mx-auto leading-relaxed">
               Делюсь мыслями, опытом и идеями в современном цифровом мире
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-              <Button size="lg" className="text-lg px-8 shadow-lg hover-lift">
-                <Icon name="BookOpen" size={20} className="mr-2" />
+            <div className="flex flex-col sm:flex-row gap-5 justify-center animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+              <Button size="lg" className="text-lg px-10 py-7 shadow-2xl hover-lift glow font-semibold rounded-2xl">
+                <Icon name="BookOpen" size={22} className="mr-2" />
                 Читать статьи
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 hover-lift">
-                <Icon name="Mail" size={20} className="mr-2" />
+              <Button size="lg" variant="outline" className="text-lg px-10 py-7 hover-lift font-semibold rounded-2xl border-2">
+                <Icon name="Mail" size={22} className="mr-2" />
                 Подписаться
               </Button>
             </div>
@@ -133,12 +137,16 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {categories.map((category) => (
                 <Badge
                   key={category}
                   variant={selectedCategory === category ? 'default' : 'outline'}
-                  className="cursor-pointer px-4 py-2 text-sm transition-all hover-lift"
+                  className={`cursor-pointer px-6 py-3 text-sm font-semibold transition-all rounded-full border-2 ${
+                    selectedCategory === category 
+                      ? 'shadow-lg glow scale-105' 
+                      : 'hover:scale-105 hover:border-primary/50'
+                  }`}
                   onClick={() => setSelectedCategory(category)}
                 >
                   {category}
@@ -147,41 +155,42 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredArticles.map((article, index) => (
               <Card
                 key={article.id}
-                className="overflow-hidden hover-lift cursor-pointer animate-in fade-in slide-in-from-bottom-4"
+                className="overflow-hidden hover-lift cursor-pointer animate-in fade-in slide-in-from-bottom-4 border-2 group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden relative">
                   <img
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">{article.category}</Badge>
-                    <span className="text-sm text-muted-foreground">{article.date}</span>
+                <CardHeader className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary" className="font-semibold">{article.category}</Badge>
+                    <span className="text-xs text-muted-foreground font-medium">{article.date}</span>
                   </div>
-                  <CardTitle className="text-xl hover:text-primary transition-colors">
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors leading-tight">
                     {article.title}
                   </CardTitle>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base leading-relaxed">
                     {article.excerpt}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground flex items-center gap-1">
+                    <span className="text-sm text-muted-foreground flex items-center gap-1.5 font-medium">
                       <Icon name="Clock" size={16} />
                       {article.readTime}
                     </span>
-                    <Button variant="ghost" size="sm" className="group">
+                    <Button variant="ghost" size="sm" className="group/btn font-semibold">
                       Читать
-                      <Icon name="ArrowRight" size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+                      <Icon name="ArrowRight" size={16} className="ml-2 transition-transform group-hover/btn:translate-x-2" />
                     </Button>
                   </div>
                 </CardContent>
@@ -191,51 +200,53 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="about" className="py-16 md:py-24 gradient-bg">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">Об авторе</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+      <section id="about" className="py-20 md:py-32 gradient-bg relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-secondary/10 via-transparent to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl font-black mb-8 gradient-text">Об авторе</h2>
+            <p className="text-xl md:text-2xl text-foreground/80 mb-12 leading-relaxed font-medium">
               Привет! Я создаю цифровые продукты и делюсь своим опытом в сфере технологий, дизайна и предпринимательства.
               В этом блоге я пишу о том, что меня вдохновляет, о своих проектах и наблюдениях за индустрией.
             </p>
-            <div className="flex justify-center gap-4">
-              <Button variant="outline" size="icon" className="hover-lift">
-                <Icon name="Github" size={20} />
+            <div className="flex justify-center gap-5">
+              <Button variant="outline" size="icon" className="hover-lift h-14 w-14 border-2 rounded-2xl">
+                <Icon name="Github" size={24} />
               </Button>
-              <Button variant="outline" size="icon" className="hover-lift">
-                <Icon name="Linkedin" size={20} />
+              <Button variant="outline" size="icon" className="hover-lift h-14 w-14 border-2 rounded-2xl">
+                <Icon name="Linkedin" size={24} />
               </Button>
-              <Button variant="outline" size="icon" className="hover-lift">
-                <Icon name="Twitter" size={20} />
+              <Button variant="outline" size="icon" className="hover-lift h-14 w-14 border-2 rounded-2xl">
+                <Icon name="Twitter" size={24} />
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <Card className="max-w-2xl mx-auto text-center overflow-hidden relative">
-            <div className="absolute inset-0 gradient-bg opacity-30"></div>
-            <CardHeader className="relative z-10">
-              <CardTitle className="text-3xl md:text-4xl gradient-text">
+      <section className="py-20 md:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <Card className="max-w-3xl mx-auto text-center overflow-hidden relative border-2 shadow-2xl">
+            <div className="absolute inset-0 gradient-bg opacity-40"></div>
+            <CardHeader className="relative z-10 pt-12 pb-8 space-y-4">
+              <CardTitle className="text-4xl md:text-5xl gradient-text font-black">
                 Подпишитесь на новости
               </CardTitle>
-              <CardDescription className="text-base">
+              <CardDescription className="text-lg md:text-xl text-foreground/70 font-medium max-w-xl mx-auto">
                 Получайте новые статьи прямо на почту. Никакого спама, только качественный контент.
               </CardDescription>
             </CardHeader>
-            <CardContent className="relative z-10">
-              <div className="flex flex-col sm:flex-row gap-3">
+            <CardContent className="relative z-10 pb-12 px-8">
+              <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
                 <Input
                   type="email"
                   placeholder="Ваш email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-12"
+                  className="flex-1 h-14 text-base border-2 rounded-xl"
                 />
-                <Button size="lg" className="shadow-lg hover-lift">
+                <Button size="lg" className="shadow-xl hover-lift glow h-14 px-8 font-bold rounded-xl">
                   <Icon name="Send" size={20} className="mr-2" />
                   Подписаться
                 </Button>
